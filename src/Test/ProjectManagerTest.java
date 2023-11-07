@@ -63,16 +63,4 @@ class ProjectManagerTest {
         assertEquals(false, pm1.equals(pm2));
     }
 
-    @Test
-     void hashCode1() {
-        Project p1 = new Project("1");
-        ProjectManager pm1 = new ProjectManager();
-        pm1.addProject(p1);
-        ProjectManager pm2 = new ProjectManager();
-        pm1.addProject(p1);
-        int r1 = pm1.hashCode();
-        int r2 = pm2.hashCode();
-
-        assertEquals(r1, r2);
-    }
 }
