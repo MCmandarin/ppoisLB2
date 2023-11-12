@@ -13,7 +13,7 @@ public abstract class Employee extends Person {
 
     public void setExperience(Integer experience) {
         if (experience < 0) {
-            throw new RuntimeException("Incorrect input!");
+            throw new IllegalArgumentException("experience cannot be less than 0");
         } else {
             this.experience = experience;
         }
@@ -25,7 +25,7 @@ public abstract class Employee extends Person {
 
     public void setWorkingHours(Integer workingHours) {
         if (workingHours < 0) {
-            throw new RuntimeException("Incorrect input!");
+            throw new IllegalArgumentException("Time cannot be less than 0");
         } else {
             this.workingHours = workingHours;
         }
@@ -37,37 +37,32 @@ public abstract class Employee extends Person {
 
     public void setSalary(Integer salary) {
         if (salary < 0) {
-            throw new RuntimeException();
+            throw new IllegalArgumentException("Salary cannot be less than 0");
         } else {
             this.salary = salary;
         }
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + Objects.hash(experience, salary, workingHours);
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Employee employee = (Employee) o;
+        return Objects.equals(experience, employee.experience) && Objects.equals(workingHours, employee.workingHours) && Objects.equals(salary, employee.salary);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!super.equals(obj))
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Employee other = (Employee) obj;
-        return Objects.equals(experience, other.experience) && Objects.equals(salary, other.salary)
-                && Objects.equals(workingHours, other.workingHours);
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), experience, workingHours, salary);
     }
 
     @Override
     public String toString() {
-        return "Employee [experience=" + experience + ", workingHours=" + workingHours + ", salary=" + salary
-                + ", toString()=" + super.toString() + "]";
+        return "Employee{" +
+                "experience=" + experience +
+                ", workingHours=" + workingHours +
+                ", salary=" + salary +
+                '}';
     }
-
 }

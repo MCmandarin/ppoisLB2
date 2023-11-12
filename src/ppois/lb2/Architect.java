@@ -36,21 +36,24 @@ public class Architect extends Employee {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!super.equals(obj))
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Architect other = (Architect) obj;
-        return Objects.equals(clients, other.clients) && specialization == other.specialization;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Architect architect = (Architect) o;
+        return specialization == architect.specialization && Objects.equals(clients, architect.clients);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), specialization, clients);
     }
 
     @Override
     public String toString() {
-        return "Architect [specialization=" + specialization + ", clients=" + clients + ", toString()="
-                + super.toString() + "]";
+        return "Architect{" +
+                "specialization=" + specialization +
+                ", clients=" + clients +
+                '}';
     }
-
 }

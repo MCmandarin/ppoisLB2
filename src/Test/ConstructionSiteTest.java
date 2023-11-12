@@ -1,51 +1,87 @@
 package Test;
 
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ppois.lb2.ConstructionSite;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConstructionSiteTest {
+    private ConstructionSite constructionSite;
 
-    @Test
-    void getPlace() {
-        ConstructionSite cs = new ConstructionSite();
-        cs.setPlace("home");
-        assertEquals("home", cs.getPlace());
+    @BeforeEach
+    public void setUp() {
+        constructionSite = new ConstructionSite();
     }
 
     @Test
-    void setPlace() {
-        ConstructionSite cs = new ConstructionSite();
-        cs.setPlace("home");
-        assertEquals("home", cs.getPlace());
+    public void testGetPlace() {
+        assertNull(constructionSite.getPlace());
     }
 
     @Test
-    void getWorkStartTime() {
-        ConstructionSite cs = new ConstructionSite();
-        cs.setWorkStartTime(8);
-        assertEquals(8, cs.getWorkStartTime());
+    public void testSetPlace() {
+        constructionSite.setPlace("Site1");
+        assertEquals("Site1", constructionSite.getPlace());
     }
 
     @Test
-    void setWorkStartTime() {
-        ConstructionSite cs = new ConstructionSite();
-        cs.setWorkStartTime(3);
-        assertEquals(null, cs.getWorkStartTime());
+    public void testGetWorkStartTime() {
+        assertNull(constructionSite.getWorkStartTime());
     }
 
     @Test
-    void getWorkEndTime() {
-        ConstructionSite cs = new ConstructionSite();
-        cs.setWorkEndTime(20);
-        assertEquals(20, cs.getWorkEndTime());
+    public void testSetValidWorkStartTime() {
+        constructionSite.setWorkStartTime(5);
+        assertEquals(Integer.valueOf(5), constructionSite.getWorkStartTime());
     }
 
     @Test
-    void setWorkEndTime() {
-        ConstructionSite cs = new ConstructionSite();
-        cs.setWorkEndTime(18);
-        assertEquals(null , cs.getWorkEndTime());
+    public void testSetInvalidWorkStartTime() {
+        constructionSite.setWorkStartTime(3); // Should print "Invalid time!"
+        assertNull(constructionSite.getWorkStartTime());
+    }
+
+    @Test
+    public void testGetWorkEndTime() {
+        assertNull(constructionSite.getWorkEndTime());
+    }
+
+    @Test
+    public void testSetValidWorkEndTime() {
+        constructionSite.setWorkEndTime(20);
+        assertEquals(Integer.valueOf(20), constructionSite.getWorkEndTime());
+    }
+
+    @Test
+    public void testSetInvalidWorkEndTime() {
+        constructionSite.setWorkEndTime(24); // Should print "Invalid time!"
+        assertNull(constructionSite.getWorkEndTime());
+    }
+
+    @Test
+    public void testEqualsAndHashCode() {
+        ConstructionSite site1 = new ConstructionSite();
+        ConstructionSite site2 = new ConstructionSite();
+
+        site1.setPlace("Site1");
+        site2.setPlace("Site1");
+
+        site1.setWorkStartTime(6);
+        site2.setWorkStartTime(6);
+
+        site1.setWorkEndTime(20);
+        site2.setWorkEndTime(20);
+
+        assertEquals(site1, site2);
+        assertEquals(site1.hashCode(), site2.hashCode());
+    }
+
+    @Test
+    public void testToString() {
+        ConstructionSite site = new ConstructionSite();
+        String expectedString = "ConstructionSite{place='null', workStartTime=null, workEndTime=null}";
+        assertEquals(expectedString, site.toString());
     }
 }

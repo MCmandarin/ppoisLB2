@@ -1,9 +1,6 @@
 package ppois.lb2;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SiteSupervisor extends Employee {
     private ConstructionSite constructionSite;
@@ -49,9 +46,24 @@ public class SiteSupervisor extends Employee {
     }
 
     @Override
-    public String toString() {
-        return "SiteSupervisor [constructionSite=" + constructionSite + ", workCrews=" + workCrews + ", toString()="
-                + super.toString() + "]";
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        SiteSupervisor that = (SiteSupervisor) o;
+        return Objects.equals(constructionSite, that.constructionSite) && Objects.equals(workCrews, that.workCrews);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), constructionSite, workCrews);
+    }
+
+    @Override
+    public String toString() {
+        return "SiteSupervisor{" +
+                "constructionSite=" + constructionSite +
+                ", workCrews=" + workCrews +
+                '}';
+    }
 }

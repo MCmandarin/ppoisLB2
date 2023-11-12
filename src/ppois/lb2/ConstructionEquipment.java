@@ -55,27 +55,26 @@ public class ConstructionEquipment {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(FuelTankCapacity, cost, id, name, weight);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ConstructionEquipment that = (ConstructionEquipment) o;
+        return Objects.equals(id, that.id) && name == that.name && Objects.equals(weight, that.weight) && Objects.equals(cost, that.cost) && Objects.equals(FuelTankCapacity, that.FuelTankCapacity);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        ConstructionEquipment other = (ConstructionEquipment) obj;
-        return Objects.equals(FuelTankCapacity, other.FuelTankCapacity) && Objects.equals(cost, other.cost)
-                && Objects.equals(id, other.id) && name == other.name && Objects.equals(weight, other.weight);
+    public int hashCode() {
+        return Objects.hash(id, name, weight, cost, FuelTankCapacity);
     }
 
     @Override
     public String toString() {
-        return "ConstructionEquipment [id=" + id + ", name=" + name + ", weight=" + weight + ", cost=" + cost
-                + ", FuelTankCapacity=" + FuelTankCapacity + "]";
+        return "ConstructionEquipment{" +
+                "id=" + id +
+                ", name=" + name +
+                ", weight=" + weight +
+                ", cost=" + cost +
+                ", FuelTankCapacity=" + FuelTankCapacity +
+                '}';
     }
-
 }

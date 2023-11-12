@@ -29,28 +29,23 @@ public class ProjectManager extends Employee {
     }
 
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + Objects.hash(projects);
-        return result;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        ProjectManager that = (ProjectManager) o;
+        return Objects.equals(projects, that.projects);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!super.equals(obj))
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        ProjectManager other = (ProjectManager) obj;
-        return Objects.equals(projects, other.projects);
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), projects);
     }
 
     @Override
     public String toString() {
-        return "ProjectManager [projects=" + projects + ", toString()=" + super.toString() + "]";
+        return "ProjectManager{" +
+                "projects=" + projects +
+                '}';
     }
-
 }

@@ -1,11 +1,14 @@
 package ppois.lb2;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 public class Person {
     private String firstName;
     private String lastName;
-    private String dateOfBrith;
+    private Date dateOfBrith;
 
     public String getLastName() {
         return lastName;
@@ -16,15 +19,17 @@ public class Person {
     }
 
     public String getDateOfBrith() {
-        return dateOfBrith;
+        if (dateOfBrith == null) {
+            return "Дата рождения не установлена";
+        }
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormat.format(dateOfBrith);
     }
 
-    public void setDateOfBrith(int day, int month, int year) {
-        if (day > 30 || day < 1 || month > 12 || month < 1 || year < 1900 || year > 2023) {
-            throw new RuntimeException("Incorrect input!");
-        } else {
-            this.dateOfBrith = day + "/" + month + "/" + year;
-        }
+    public void setDateOfBrith(String dateOfBrith) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        this.dateOfBrith = dateFormat.parse(dateOfBrith);
     }
 
     public String getFirstName() {
@@ -36,26 +41,24 @@ public class Person {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(dateOfBrith, firstName, lastName);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(dateOfBrith, person.dateOfBrith);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Person other = (Person) obj;
-        return Objects.equals(dateOfBrith, other.dateOfBrith) && Objects.equals(firstName, other.firstName)
-                && Objects.equals(lastName, other.lastName);
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, dateOfBrith);
     }
 
     @Override
     public String toString() {
-        return "Person [firstName=" + firstName + ", lastName=" + lastName + ", dateOfBrith=" + dateOfBrith + "]";
+        return "Person{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dateOfBrith=" + dateOfBrith +
+                '}';
     }
-
 }

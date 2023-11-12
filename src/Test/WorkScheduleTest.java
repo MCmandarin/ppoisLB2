@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import ppois.lb2.Weekday;
 import ppois.lb2.WorkSchedule;
 
+import java.time.LocalTime;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,37 +12,24 @@ import static org.junit.jupiter.api.Assertions.*;
 class WorkScheduleTest {
 
     @Test
-    void getWorkingHours() {
-        WorkSchedule ws = new WorkSchedule();
-        ws.addWorkDay(Weekday.MONDAY, "9-18");
-        assertEquals("9-18", ws.getWorkingHours(Weekday.MONDAY));
+    public void testSetAndGetWorkHours() {
+        WorkSchedule workSchedule = new WorkSchedule();
+
+        LocalTime startTime = LocalTime.of(9, 0);
+        LocalTime endTime = LocalTime.of(17, 0);
+
+        workSchedule.setWorkHours(Weekday.MONDAY, startTime, endTime);
+
+        assertEquals(startTime, workSchedule.getWorkHours(Weekday.MONDAY).getStartTime());
+        assertEquals(endTime, workSchedule.getWorkHours(Weekday.MONDAY).getEndTime());
     }
 
     @Test
-    void addWorkDay() {
-    }
+    public void testEmptyScheduleToString() {
+        WorkSchedule workSchedule = new WorkSchedule();
 
-    @Test
-    void getSchedule() {
-        WorkSchedule ws = new WorkSchedule();
-        ws.addWorkDay(Weekday.MONDAY, "9-18");
-        Map<Weekday, String> map = ws.getSchedule();
-        assertEquals(1, ws.getSchedule().size());
-    }
+        String expectedString = "Work Schedule:\n";
 
-    @Test
-    void removeWorkDay() {
-        WorkSchedule ws = new WorkSchedule();
-        ws.addWorkDay(Weekday.MONDAY, "9-18");
-        ws.addWorkDay(Weekday.SATURDAY, "9-18");
-        ws.removeWorkDay(Weekday.MONDAY);
-        assertEquals(null, ws.getWorkingHours(Weekday.MONDAY));
-    }
-
-    @Test
-    void isWorkDay() {
-        WorkSchedule ws = new WorkSchedule();
-        ws.addWorkDay(Weekday.MONDAY, "9-18");
-        assertEquals(false, ws.isWorkDay(Weekday.SATURDAY));
+        assertEquals(expectedString, workSchedule.toString());
     }
 }

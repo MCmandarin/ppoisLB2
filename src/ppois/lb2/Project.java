@@ -60,28 +60,26 @@ public class Project {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(TimeToComplete, nameProject, price, schedule, teamMembers);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Project project = (Project) o;
+        return Objects.equals(nameProject, project.nameProject) && Objects.equals(price, project.price) && Objects.equals(teamMembers, project.teamMembers) && Objects.equals(TimeToComplete, project.TimeToComplete) && Objects.equals(schedule, project.schedule);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Project other = (Project) obj;
-        return Objects.equals(TimeToComplete, other.TimeToComplete) && Objects.equals(nameProject, other.nameProject)
-                && Objects.equals(price, other.price) && Objects.equals(schedule, other.schedule)
-                && Objects.equals(teamMembers, other.teamMembers);
+    public int hashCode() {
+        return Objects.hash(nameProject, price, teamMembers, TimeToComplete, schedule);
     }
 
     @Override
     public String toString() {
-        return "Project [nameProject=" + nameProject + ", price=" + price + ", teamMembers=" + teamMembers
-                + ", TimeToComplete=" + TimeToComplete + ", schedule=" + schedule + "]";
+        return "Project{" +
+                "nameProject='" + nameProject + '\'' +
+                ", price=" + price +
+                ", teamMembers=" + teamMembers +
+                ", TimeToComplete=" + TimeToComplete +
+                ", schedule=" + schedule +
+                '}';
     }
-
 }

@@ -1,5 +1,7 @@
 package ppois.lb2;
 
+import java.util.Objects;
+
 public class ConstructionSite {
     private String place;
     private Integer workStartTime;
@@ -38,8 +40,24 @@ public class ConstructionSite {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ConstructionSite that = (ConstructionSite) o;
+        return Objects.equals(place, that.place) && Objects.equals(workStartTime, that.workStartTime) && Objects.equals(workEndTime, that.workEndTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(place, workStartTime, workEndTime);
+    }
+
+    @Override
     public String toString() {
-        return "ConstructionSite [place=" + place + ", workStartTime=" + workStartTime + "h, workEndTime=" + workEndTime
-                + "h]";
+        return "ConstructionSite{" +
+                "place='" + place + '\'' +
+                ", workStartTime=" + workStartTime +
+                ", workEndTime=" + workEndTime +
+                '}';
     }
 }
