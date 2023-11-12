@@ -1,14 +1,12 @@
 package ppois.lb2;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class ProjectManager extends Employee {
-    private List<Project> projects;
+    private Set<Project> projects;
 
     public ProjectManager() {
-        projects = new ArrayList<Project>();
+        projects = new HashSet<>();
     }
 
     public void addProject(Project project) {
@@ -24,7 +22,7 @@ public class ProjectManager extends Employee {
         projects.remove(project);
     }
 
-    public List<Project> getProjects() {
+    public Set<Project> getProjects() {
         return projects;
     }
 
