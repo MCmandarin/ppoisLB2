@@ -21,8 +21,7 @@ public class ConstructionSite {
 
     public void setWorkStartTime(Integer workStartTime) {
         if (workStartTime < 4 || workStartTime > 11) {
-            System.out.println("Invalid time!");
-            return;
+            throw new IllegalArgumentException("Interval should be in range of 4 and 11");
         }
         this.workStartTime = workStartTime;
     }
@@ -33,13 +32,12 @@ public class ConstructionSite {
 
     public void setWorkEndTime(Integer workEndTime) {
         if (workEndTime < 19 || workEndTime > 23) {
-            System.out.println("Invalid time!");
-            return;
+            throw new IllegalArgumentException("Interval should be in range of 4 and 11");
         }
         this.workEndTime = workEndTime;
     }
 
-    @Override
+    @OverrideSyste
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

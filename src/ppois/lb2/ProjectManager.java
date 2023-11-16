@@ -9,13 +9,13 @@ public class ProjectManager extends Employee {
         projects = new HashSet<>();
     }
 
-    public void addProject(Project project) {
+    public void addProject(Project newProject) {
         for (Project i : projects) {
-            if (i.getNameProject().equals(project.getNameProject())) {
+            if (i.getNameProject().equals(newProject.getNameProject())) {
                 return;
             }
         }
-        projects.add(project);
+        projects.add(newProject);
     }
 
     public void deleteProject(Project project) {
