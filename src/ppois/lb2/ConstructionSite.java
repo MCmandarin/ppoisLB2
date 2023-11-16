@@ -32,7 +32,7 @@ public class ConstructionSite {
 
     public void setWorkEndTime(Integer workEndTime) {
         if (workEndTime < 19 || workEndTime > 23) {
-            throw new IllegalArgumentException("Interval should be in range of 4 and 11");
+            throw new IllegalArgumentException("Interval should be in range of 19 and 23");
         }
         this.workEndTime = workEndTime;
     }
